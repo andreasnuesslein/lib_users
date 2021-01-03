@@ -7,7 +7,7 @@ To be run through nose, not executed directly.
 import os
 import sys
 import locale
-from lib_users_util import common
+from . import common
 import unittest
 
 if sys.version_info.major == 2:

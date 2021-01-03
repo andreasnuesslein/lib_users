@@ -1,10 +1,6 @@
-#!/usr/bin/python -tt
 """
 Libusers - a script that finds users of libs that have been deleted/replaced
 """
-
-# Released under the GPL-2
-# -*- coding: utf8 -*-
 
 import argparse
 import sys
@@ -14,7 +10,7 @@ import os
 
 from os.path import normpath
 from collections import defaultdict
-from lib_users_util import common
+from .util import common
 
 PERMWARNINGUID0 = """Warning: Some files could not be read.\n"""
 PERMWARNING = """\
@@ -60,7 +56,7 @@ def get_deleted_libs(map_file):
     return deletedlibs
 
 
-def main(argv):
+def lib_users():
     """Main program"""
     parser = argparse.ArgumentParser()
     parser.add_argument('--version', action='version',
@@ -80,7 +76,7 @@ def main(argv):
                         help="Ignore deleted files named %(metavar)s. "
                         "Can be specified multiple times.")
 
-    options = parser.parse_args(argv)
+    options = parser.parse_args(sys.argv[1:])
     options.showitems = options.showlibs
 
     NOLIBSPT.update(options.ignore_pattern)
@@ -130,4 +126,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    lib_users()

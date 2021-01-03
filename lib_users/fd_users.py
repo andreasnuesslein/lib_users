@@ -1,9 +1,7 @@
-#!/usr/bin/python -tt
 """
 Libusers - a script that finds users of files that have been deleted/replaced
 """
-# Released under the GPL-2
-# -*- coding: utf8 -*-
+
 import argparse
 import sys
 import glob
@@ -11,7 +9,7 @@ import fnmatch
 import os
 
 from collections import defaultdict
-from lib_users_util import common
+from .util import common
 
 DELSUFFIX = " (deleted)"
 PERMWARNING = """Warning: Some files could not be read."""
@@ -59,7 +57,7 @@ def match_any(name, patterns):
     return False
 
 
-def main(argv):
+def fd_users():
     """Main program"""
     parser = argparse.ArgumentParser()
     parser.add_argument('--version', action='version',
@@ -79,7 +77,7 @@ def main(argv):
                         help="Ignore deleted files named %(metavar)s. "
                         "Can be specified multiple times.")
 
-    options = parser.parse_args(argv)
+    options = parser.parse_args(sys.argv[1:])
     options.showitems = options.showfiles
 
     users = defaultdict(lambda: (set(), set()))
@@ -129,4 +127,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    fd_users()
